@@ -1,27 +1,29 @@
 # coding: utf-8
-#
+"""
+This module contains hotkey spec list.
+"""
 from __future__ import absolute_import
 
+# Internal imports
 from aoikhotkey.const import SPEC_SWITCH_V_NEXT
 from aoikhotkey.const import SPEC_SWITCH_V_PREV
-from aoikhotkey.spec.efunc import efunc_no_mouse
-from aoikhotkey.spec.util import SpecReload
-from aoikhotkey.spec.util import SpecSwitch
+from aoikhotkey.util.efunc import efunc_no_mouse
+from aoikhotkey.util.cmd import SpecSwitch
 
 
-#
 SPEC = [
-    # Set event function. A sole "$" is a special value to mean event function.
-    ('$', efunc_no_mouse),
+    # ----- Event function -----
 
-    # Reload hotkey spec.
-    # A starting "$" means to call in the same thread.
-    # "SpecReload" must be called in the same thread.
-    ('$#{ESC}', SpecReload),
+    # None means event function
+    (None, efunc_no_mouse),
+
+    # ----- [ -----
 
     # Switch to previous hotkey spec
-    ('$^![', SpecSwitch(SPEC_SWITCH_V_PREV)),
+    ('^![', SpecSwitch(SPEC_SWITCH_V_PREV)),
+
+    # ----- ] -----
 
     # Switch to next hotkey spec
-    ('$^!]', SpecSwitch(SPEC_SWITCH_V_NEXT)),
+    ('^!]', SpecSwitch(SPEC_SWITCH_V_NEXT)),
 ]
